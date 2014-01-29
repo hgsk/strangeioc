@@ -1,60 +1,64 @@
-## Strange: the IoC framework for `Unity3D` and `C#`
+## Strange: Unity3DとC#のためのUnityのためのIoCフレームワーク
 
-Current version: v0.7.0
+現在のバージョン: v0.7.0
 
-> Strange attractors create predictable patterns, often in chaotic systems.
+> Strange アトラクタはおおくの混沌としたシステムで予測可能なパターンを作成します。
 
-Strange is a super-lightweight and highly extensible Inversion-of-Control (IoC) framework, written specifically for C# and Unity. We've validated Strange on web, standalone, and iOS. We're not currently developing for Android, but we're fairly certain it'll run just fine there, too (er, please let us know!!!).
+StrangeはC＃とユニティのために特別に書かれた、超軽量で拡張性の高い反転·オブ·コントロール（IOC）のフレームワークです。 我々は、Web、スタンドアロン、およびiOSとAndroid上でStrangeを検証してきました。 Android用の開発はしていませんが、問題なく実行できると思います。(動かなかったら教えてください！)
 
-* [Overview](http://thirdmotion.github.com/strangeioc/exec.html)
-* [StrangeIoC documentation](http://thirdmotion.github.com/strangeioc/docs/html/index.html)
-* [The Big, Strange How-To](http://thirdmotion.github.com/strangeioc/TheBigStrangeHowTo.html)
-* [Do you use RobotLegs? You're in luck! This Strange page is for you!](http://thirdmotion.github.com/strangeioc/rl.html)
+* [概要](http://thirdmotion.github.com/strangeioc/exec.html)
+* [ドキュメント](http://thirdmotion.github.com/strangeioc/docs/html/index.html)
+* [How To](http://thirdmotion.github.com/strangeioc/TheBigStrangeHowTo.html)
+* [ロボットレッグを使っていますか？それならStrangeはあなたのためにあります！](http://thirdmotion.github.com/strangeioc/rl.html)
 * [FAQ](http://thirdmotion.github.com/strangeioc/faq.html)
-* [Feature requests/Bug reports](https://github.com/thirdmotion/strangeioc/issues)
+* [機能リクエスト/バグレポート](https://github.com/thirdmotion/strangeioc/issues)
 
-It contains the following features, most of which are optional:
+Strangeは以下の機能を含みます。（ほとんどはオプションです）
 
-* A core binding framework that pretty much lets you bind one or more of anything to one or more of anything else.
-* Dependency Injection
-  * Map as singleton, value or factory (get a new instance each time you need one)
-  * Name injections
-  * Perform constructor or setter injection
-  * Tag your preferred constructor
-  * Tag a method to fire after construction
-  * Inject into MonoBehaviours
-  * Bind polymorphically (bind any or all of your interfaces to a single concrete class)
-* Reflection binding dramatically reduces overhead of employing reflectivity
-* Two shared event bus systems, EventDispatcher and Signals. Both allow you to:
-  * Dispatch events to any point in your application
-  * Map local events for local communication
-  * Map events to Commands classes to separate business logic
-  * EventDispatcher transmits data payloads as primitives or ValueObjects
-  * Signals transmits data in bindable, type-safe parameters
-* MonoBehaviour mediation
-  * Facilitate separation of a view from the application using it
-  * Keep Unity-specific code isolated from the rest of the app
-* Optional MVCS (Model/View/Controller/Service) structure
-* Multiple contexts
-  * Allow subcomponents (separate Scenes) to function on their own, or in the context of larger apps.
-  * Allow communication between contexts.
-* Don't see what you need? The core binding framework is simple to extend. Build new Binders like:
-  * A different type of dispatcher, like AS3-Signals <- WAIT A MOMENT! WE DID EXACTLY THAT!!!
-  * An entity framework
-  * A multi-loader
+* バインディングフレームワーク
+* DI
+  * シングルトン、value、ファクトリのマッピング（新しいインスタンスごとに取得）
+  * 名前のインジェクション
+  * コンストラクタインジェクション、setterインジェクションの実行
+  * お好みのコンストラクタにタグ付け
+  * オブジェクト生成後に実行するメソッドのタグ付け
+  * MonoBehavioursへのインジェクション
+  * 多態バインディング (あらゆるインターフェースの、具象クラスへのバインディング)
+* リフレクション機構のオーバーヘッドを劇的に軽減する、リフレクションバインディング
+* ２通りのイベントバスシステム: EventDispatcher, Signal
+  これにより、
+  * あらゆる場所にイベントをマッピング
+  * ローカル通信のためのローカルイベントをマッピング
+  * イベントをCommandクラスにマッピングし、ビジネスロジックを分離
+  * EventDispatcherはペイロードデータをプリミティブ、またはVOとして転送できます
+  * シグナルはデータをバインダブルで、型安全なパラメータとして転送します
+* MonoBehaviourの仲介
+  * アプリケーションからビューの分離を容易に
+  * Unity固有のコードを分離
+* MVCS (Model/View/Controller/Service) （オプショナル）
+* 複数のコンテキスト
+  * サブコンポーネントを (シーン分離) その中だけで、またはさらに大きなアプリケーションの中で機能するようにできます
+  * コンテクスト間の通信
+* 必要なものがない？ コアバインディングフレームワークを拡張するのは簡単です。 次のようなバインダを構築できます:
+  * AS3-Signalsのような違うタイプのディスパッチャ （もうちょい待って！作りましたので！）
+  * エンティティフレームワーク
+  * マルチローダー
 
-In addition to organizing your project into a sensible structure, Strange offers the following benefits:
+Strangeには、あなたのプロジェクトを賢い構造にするだけでなく、次のような利点もあります。
 
-* Designed to play well with Unity3D. Also designed to play well without it.
-* Separate UnityEngine code from the rest of your app.
-  * Improves portability
-  * Improves unit testability
-* A common event bus makes information flow easy and highly decoupled. (Note: Unity's SendMessage method does this, of course, but it's dangerous as all get-out. I may write a whole article on just this topic at some point.)
-* The extensible binder really is amazing (a friend used to tell me "it's good to like your own cookin'"). The number of things you can accomplish with the tiny core framework would justify Strange all on its own.
-* Multiple contexts allow you to "bootstrap" subcomponents so they operate fine either on their own or as an integrated part. This can hugely speed up your development process and allow developers to work in isolation, then integrate in later stages of development.
-* Get rid of platform-specific #IF...#ELSE constructs in your code. IoC allows you to write whole concrete implementations correctly, then bind the ones you want to use at compile time or at run time. (As with other forms of binding, #IF...#ELSE clauses can be isolated into a single class and away from the rest of your code.)
+* Unity3Dで扱いやすいように設計（Unity3D無しでもうまく動きます。）
+* UnityEngineのコードをアプリケーションから分離
+  * ポータビリティの向上
+  * ユニットテスト容易性の向上
+* 共通イベントバスが情報の流れを簡単かつ高度に分離（注: UnityのSendMessageメソッドもありますが、わりと危険です。この点については全体を通して触れていきます）
+* 拡張可能なバインダは本当に便利です。 (友人は「自分のキッチンみたいに便利」と言ってくれました） 
+この小さなコアフレームワークで実現できることは多く、Strangeの独自性を認めてもらえると思います。
+* 複数コンテクストはサブコンポーネントを「bootstrap」できます。
+サブコンポーネントは単独でも動作しますし、部品としても動きます。
+これによりあなた自身の開発や、複数人による分散開発と開発終盤での統合をスピードアップできます。
+* コードからプラットフォーム固有の #IF...#ELSE 構造を取り除くことができます. IoCはすべての具象化の実装を正しく書けるするようにでき、使いたいものをコンパイル時、ランタイム時にバインドできます。 (バインディングの別の形として #IF...#ELSE 構文 をアプリケーションから単一クラスに分離できます。)
 
-# Acknowledgements
+# 謝辞
 It is hard to adequately credit the creators of the open source Actionscript framework RobotLegs for their influence on the creation of StrangeIoC. While Strange is not a port of RobotLegs, the ensigns of that library are copiously reflected throughout this one. For their great service to my professional development, I offer that team my sincerest thanks. And a donut. Seriously, if you're ever in town, let me buy you a donut.
 
 Kudos to Will Corwin for picking up a thrown-down gauntlet and writing the Signals implementation.
